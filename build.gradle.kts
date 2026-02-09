@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    java
-    `java-library`
-    `maven-publish`
-    kotlin("jvm") version "2.1.0"
-    id("io.github.goooler.shadow") version "8.1.7"
-    id("com.willfp.libreforge-gradle-plugin") version "1.0.0"
+    kotlin("jvm") version "2.3.0"
+    id("java-library")
+    id("com.gradleup.shadow") version "9.3.1"
+    id("maven-publish")
+    id("java")
+    id("com.willfp.libreforge-gradle-plugin") version "1.0.3"
 }
 
 group = "com.willfp"
@@ -32,7 +32,7 @@ allprojects {
     apply(plugin = "java")
     apply(plugin = "kotlin")
     apply(plugin = "maven-publish")
-    apply(plugin = "io.github.goooler.shadow")
+    apply(plugin = "com.gradleup.shadow")
 
     repositories {
         mavenLocal()
@@ -45,9 +45,10 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("com.willfp:eco:6.77.0")
-        compileOnly("org.jetbrains:annotations:23.0.0")
-        compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.1.0")
+        compileOnly("com.willfp:eco:6.77.3")
+        compileOnly("org.jetbrains:annotations:26.0.2")
+        compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
+        compileOnly("com.github.ben-manes.caffeine:caffeine:3.2.3")
     }
 
     java {
@@ -78,7 +79,7 @@ allprojects {
             filesMatching(listOf("**plugin.yml", "**eco.yml")) {
                 expand(
                     "version" to project.version,
-                    "libreforgeVersion" to libreforgeVersion,
+                    "libreforgeVersion" to libreforgeVersion!!,
                     "pluginName" to rootProject.name
                 )
             }
