@@ -14,7 +14,6 @@ import com.willfp.eco.util.evaluateExpression
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.toNiceString
 import com.willfp.eco.util.toNumeral
-import com.willfp.ecoskills.skills.SkillsLeaderboard
 import com.willfp.ecoskills.skills.SkillsLeaderboard.getPosition
 import com.willfp.ecoskills.util.LevelInjectable
 import com.willfp.ecoskills.util.loadDescriptionPlaceholders
@@ -23,8 +22,7 @@ import java.util.concurrent.TimeUnit
 
 abstract class Levellable(
     final override val id: String,
-    val config: Config,
-    protected val plugin: EcoSkillsPlugin
+    val config: Config
 ) : KRegistrable {
     val startLevel = 0
 

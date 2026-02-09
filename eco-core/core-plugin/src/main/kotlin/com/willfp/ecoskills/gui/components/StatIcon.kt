@@ -1,7 +1,6 @@
 package com.willfp.ecoskills.gui.components
 
 import com.github.benmanes.caffeine.cache.Caffeine
-import com.willfp.eco.core.EcoPlugin
 import com.willfp.eco.core.config.interfaces.Config
 import com.willfp.eco.core.gui.slot
 import com.willfp.eco.core.items.Items
@@ -11,7 +10,6 @@ import com.willfp.ecoskills.api.getStatLevel
 import com.willfp.ecoskills.plugin
 import com.willfp.ecoskills.stats.Stat
 import org.bukkit.inventory.ItemStack
-import java.util.UUID
 import java.util.concurrent.TimeUnit
 
 private val itemCache = Caffeine.newBuilder()
@@ -20,8 +18,7 @@ private val itemCache = Caffeine.newBuilder()
 
 class StatIcon(
     stat: Stat,
-    config: Config,
-    plugin: EcoPlugin
+    config: Config
 ) : PositionedComponent {
     private val baseIcon = Items.lookup(config.getString("icon")).item
 

@@ -12,7 +12,6 @@ import com.willfp.eco.util.evaluateExpression
 import com.willfp.eco.util.formatEco
 import com.willfp.eco.util.toNiceString
 import com.willfp.eco.util.toNumeral
-import com.willfp.ecoskills.EcoSkillsPlugin
 import com.willfp.ecoskills.Levellable
 import com.willfp.ecoskills.api.getFormattedRequiredXP
 import com.willfp.ecoskills.api.getSkillLevel
@@ -28,7 +27,6 @@ import com.willfp.ecoskills.stats.Stats
 import com.willfp.ecoskills.util.InvalidConfigurationException
 import com.willfp.ecoskills.util.LevelInjectable
 import com.willfp.ecoskills.util.loadDescriptionPlaceholders
-import com.willfp.libreforge.EmptyProvidedHolder
 import com.willfp.libreforge.NamedValue
 import com.willfp.libreforge.ViolationContext
 import com.willfp.libreforge.conditions.Conditions
@@ -42,9 +40,8 @@ import org.bukkit.entity.Player
 
 class Skill(
     id: String,
-    config: Config,
-    plugin: EcoSkillsPlugin
-) : Levellable(id, config, plugin) {
+    config: Config
+) : Levellable(id, config) {
     private val xpKey = PersistentDataKey(
         plugin.createNamespacedKey("${id}_xp"),
         PersistentDataKeyType.DOUBLE,
@@ -86,9 +83,9 @@ class Skill(
         ViolationContext(plugin, "Skill $id level-up-effects")
     )
 
-    val levelGUI = SkillLevelGUI(plugin, this)
+    val levelGUI = SkillLevelGUI(this)
 
-    val icon = SkillIcon(this, config.getSubsection("gui"), plugin)
+    val icon = SkillIcon(this, config.getSubsection("gui"))
 
     val isHiddenBeforeLevel1 = config.getBool("hide-before-level-1")
 
@@ -111,7 +108,7 @@ class Skill(
     }
 
     override fun onRegister() {
-        val accumulator = SkillXPAccumulator(plugin, this)
+        val accumulator = SkillXPAccumulator(this)
 
         for (counter in xpGainMethods) {
             counter.bind(accumulator)
