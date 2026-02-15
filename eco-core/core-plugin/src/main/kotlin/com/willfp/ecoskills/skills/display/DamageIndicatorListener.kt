@@ -65,7 +65,7 @@ object DamageIndicatorListener : Listener {
 
         val holo = HologramManager.createHologram(location, listOf(text))
 
-        plugin.scheduler.runLater(30) {
+        plugin.scheduler.runTaskLater(location, 30) {
             holo.remove()
         }
     }
@@ -96,7 +96,7 @@ object DamageIndicatorListener : Listener {
 
         val holo = HologramManager.createHologram(location, listOf(text))
 
-        plugin.scheduler.runLater(30) {
+        plugin.scheduler.runTaskLater(location, 30) {
             holo.remove()
         }
     }

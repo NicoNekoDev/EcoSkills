@@ -46,7 +46,7 @@ object EffectMultiplyStatTemporarily : Effect<NoCompileData>("multiply_stat_temp
             )
         )
 
-        plugin.scheduler.runLater(config.getIntFromExpression("duration", data).toLong()) {
+        plugin.scheduler.runTaskLater(player, config.getIntFromExpression("duration", data).toLong()) {
             player.removeStatModifier(uuid)
         }
 
